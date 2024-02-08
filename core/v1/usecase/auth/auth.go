@@ -14,10 +14,7 @@ import (
 	"github.com/golang-jwt/jwt"
 
 	portAccount "dealls/core/v1/port/account"
-	portBroker "dealls/core/v1/port/broker"
 	portCache "dealls/core/v1/port/cache"
-	portCommon "dealls/core/v1/port/common"
-	portRetrier "dealls/core/v1/port/retrier"
 )
 
 var log = util.NewLogger()
@@ -25,26 +22,17 @@ var log = util.NewLogger()
 type authUsecaseImpl struct {
 	accountRepository portAccount.AccountRepository
 	cacheRepository   portCache.CacheRepository
-	transaction       portCommon.Transaction
-	retrier           portRetrier.Retrier
-	pubsub            portBroker.Pubsub
 	cfg               *config.AppConfig
 }
 
 func NewAuthUsecase(
 	accountRepository portAccount.AccountRepository,
 	cacheRepository portCache.CacheRepository,
-	transaction portCommon.Transaction,
-	retrier portRetrier.Retrier,
-	pubsub portBroker.Pubsub,
 	cfg *config.AppConfig,
 ) auth.AuthUsecase {
 	return &authUsecaseImpl{
 		accountRepository: accountRepository,
 		cacheRepository:   cacheRepository,
-		transaction:       transaction,
-		retrier:           retrier,
-		pubsub:            pubsub,
 		cfg:               cfg,
 	}
 }

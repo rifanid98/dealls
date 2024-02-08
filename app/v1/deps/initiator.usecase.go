@@ -16,9 +16,6 @@ func (d *dependency) initAuthUsecase() {
 	d.usecase.AuthUsecase = auth.NewAuthUsecase(
 		d.repo.AccountRepository,
 		d.repo.CacheRepository,
-		d.base.Mdbt,
-		d.base.Rtr,
-		d.broker.Pubsub,
 		d.base.Cfg,
 	)
 }
