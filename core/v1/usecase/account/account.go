@@ -69,8 +69,8 @@ func (uc *accountUsecaseImpl) AccountAction(ic *core.InternalContext, accountId,
 		Profiles: make(map[string]any),
 		Expired:  expired.Unix(),
 	}
-	if get != nil {
-		cerr = helper.StringToStruct(*get, &quota)
+	if get != "" {
+		cerr = helper.StringToStruct(get, &quota)
 		if cerr != nil {
 			log.Error(ic.ToContext(), "failed helper.StringToStruct(*get, &quota)", cerr)
 			return cerr
@@ -93,13 +93,12 @@ func (uc *accountUsecaseImpl) AccountAction(ic *core.InternalContext, accountId,
 	if cerr != nil {
 		log.Error(ic.ToContext(), "failed helper.StringToStruct(helper.DataToString(c), &claims)", cerr)
 		return &core.CustomError{
-			Code:    core.BAD_REQUEST,
-			Message: "quota limit reached",
+			Code:    core.INTERNAL_SERVER_ERROR,
+			Message: "cannot read claims",
 		}
 	}
 
-	//if claims.Verified == core.ACCOUNT_UNVERIFIED && len(quota.Profiles) >= 10 {
-	if claims.Verified == core.ACCOUNT_UNVERIFIED && len(quota.Profiles) >= 1 {
+	if claims.Verified == core.ACCOUNT_UNVERIFIED && len(quota.Profiles) >= 10 {
 		return &core.CustomError{
 			Code:    core.BAD_REQUEST,
 			Message: "quota limit reached",
@@ -170,8 +169,8 @@ func (uc *accountUsecaseImpl) AccountList(ic *core.InternalContext, accountId st
 	}
 
 	var quota = SwipeQuota{}
-	if get != nil {
-		cerr = helper.StringToStruct(*get, &quota)
+	if get != "" {
+		cerr = helper.StringToStruct(get, &quota)
 		if cerr != nil {
 			log.Error(ic.ToContext(), "failed helper.StringToStruct(*get, &quota)", cerr)
 			return nil, 0, cerr
@@ -257,11 +256,11 @@ func (uc *accountUsecaseImpl) AccountActivationCheck(ic *core.InternalContext) *
 
 			transactionId := helper.DataToString(account.Metadata["id"])
 
-			result, cerr := uc.adapterXendit.QrCheck(ic, map[string]any{
+			result, cerr := uc.adapterXendit.QRCheck(ic, map[string]any{
 				"id_qr": transactionId,
 			})
 			if cerr != nil {
-				log.Error(ic.ToContext(), fmt.Sprintf("failed  uc.adapterXendit.QrCheck::%v::%v", account.Id, account.Metadata["id"]), cerr)
+				log.Error(ic.ToContext(), fmt.Sprintf("failed  uc.adapterXendit.QRCheck::%v::%v", account.Id, account.Metadata["id"]), cerr)
 				return
 			}
 

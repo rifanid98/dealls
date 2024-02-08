@@ -34,7 +34,7 @@ examples include repository, apicall and redis.
 - Make sure the logo appear.
 - Server run at ```localhost:8084```.
 - Visit swagger at ```localhost:8084/api/swagger/index.html#/```.
-- Run unit test ```go test ./...```
+- Run unit test ```go test -v ./...```
 
 
 ## Stacks

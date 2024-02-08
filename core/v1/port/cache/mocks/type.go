@@ -4,7 +4,7 @@ import "dealls/core"
 
 type CacheRepositoryMock struct {
 	Delete  *core.CustomError
-	Get     *string
+	Get     string
 	GetErr  *core.CustomError
 	HSet    *core.CustomError
 	Publish *core.CustomError

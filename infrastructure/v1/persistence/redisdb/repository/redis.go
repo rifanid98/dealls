@@ -58,20 +58,23 @@ func (redis *cacheRepositoryImpl) HSet(ic *core.InternalContext, key string, val
 	return nil
 }
 
-func (redis *cacheRepositoryImpl) Get(ic *core.InternalContext, key string) (*string, *core.CustomError) {
+func (redis *cacheRepositoryImpl) Get(ic *core.InternalContext, key string) (string, *core.CustomError) {
 	get, err := redis.client.Get(ic.ToContext(), key)
 	if err != nil {
 		if err.Error() == "redis: nil" {
-			return nil, nil
+			return "", nil
 		}
 
 		log.Error(ic.ToContext(), "failed to Get", err)
-		return nil, &core.CustomError{
+		return "", &core.CustomError{
 			Code:    core.INTERNAL_SERVER_ERROR,
 			Message: err.Error(),
 		}
 	}
-	return get, nil
+	if get == nil {
+		return "", nil
+	}
+	return *get, nil
 }
 
 func (redis *cacheRepositoryImpl) Delete(ic *core.InternalContext, key string) *core.CustomError {

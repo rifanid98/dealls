@@ -14,34 +14,6 @@ type AccountRepository struct {
 	mock.Mock
 }
 
-// FindAccountByAccountId provides a mock function with given fields: ic, accountId
-func (_m *AccountRepository) FindAccountByAccountId(ic *core.InternalContext, accountId string) (*entity.Account, *core.CustomError) {
-	ret := _m.Called(ic, accountId)
-
-	var r0 *entity.Account
-	var r1 *core.CustomError
-	if rf, ok := ret.Get(0).(func(*core.InternalContext, string) (*entity.Account, *core.CustomError)); ok {
-		return rf(ic, accountId)
-	}
-	if rf, ok := ret.Get(0).(func(*core.InternalContext, string) *entity.Account); ok {
-		r0 = rf(ic, accountId)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*entity.Account)
-		}
-	}
-
-	if rf, ok := ret.Get(1).(func(*core.InternalContext, string) *core.CustomError); ok {
-		r1 = rf(ic, accountId)
-	} else {
-		if ret.Get(1) != nil {
-			r1 = ret.Get(1).(*core.CustomError)
-		}
-	}
-
-	return r0, r1
-}
-
 // FindAccountByEmail provides a mock function with given fields: ic, email
 func (_m *AccountRepository) FindAccountByEmail(ic *core.InternalContext, email string) (*entity.Account, *core.CustomError) {
 	ret := _m.Called(ic, email)
@@ -215,50 +187,6 @@ func (_m *AccountRepository) InsertAccount(ic *core.InternalContext, _a1 *entity
 	}
 
 	return r0, r1
-}
-
-// InsertAccounts provides a mock function with given fields: ic, accounts
-func (_m *AccountRepository) InsertAccounts(ic *core.InternalContext, accounts []entity.Account) ([]entity.Account, *core.CustomError) {
-	ret := _m.Called(ic, accounts)
-
-	var r0 []entity.Account
-	var r1 *core.CustomError
-	if rf, ok := ret.Get(0).(func(*core.InternalContext, []entity.Account) ([]entity.Account, *core.CustomError)); ok {
-		return rf(ic, accounts)
-	}
-	if rf, ok := ret.Get(0).(func(*core.InternalContext, []entity.Account) []entity.Account); ok {
-		r0 = rf(ic, accounts)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]entity.Account)
-		}
-	}
-
-	if rf, ok := ret.Get(1).(func(*core.InternalContext, []entity.Account) *core.CustomError); ok {
-		r1 = rf(ic, accounts)
-	} else {
-		if ret.Get(1) != nil {
-			r1 = ret.Get(1).(*core.CustomError)
-		}
-	}
-
-	return r0, r1
-}
-
-// SetAccountOtp provides a mock function with given fields: ic, otp, accountId
-func (_m *AccountRepository) SetAccountOtp(ic *core.InternalContext, otp string, accountId string) *core.CustomError {
-	ret := _m.Called(ic, otp, accountId)
-
-	var r0 *core.CustomError
-	if rf, ok := ret.Get(0).(func(*core.InternalContext, string, string) *core.CustomError); ok {
-		r0 = rf(ic, otp, accountId)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*core.CustomError)
-		}
-	}
-
-	return r0
 }
 
 // UpdateAccount provides a mock function with given fields: ic, _a1

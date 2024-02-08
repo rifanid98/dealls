@@ -42,7 +42,7 @@ func (_m *XenditApiCall) QRCreate(ic *core.InternalContext, data map[string]inte
 }
 
 // QrCheck provides a mock function with given fields: ic, data
-func (_m *XenditApiCall) QrCheck(ic *core.InternalContext, data map[string]interface{}) (map[string]interface{}, *core.CustomError) {
+func (_m *XenditApiCall) QRCheck(ic *core.InternalContext, data map[string]interface{}) (map[string]interface{}, *core.CustomError) {
 	ret := _m.Called(ic, data)
 
 	var r0 map[string]interface{}

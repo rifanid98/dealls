@@ -134,7 +134,7 @@ func (x *xenditApiCallImpl) QRCreate(ic *core.InternalContext, data map[string]a
 	return response, nil
 }
 
-func (x *xenditApiCallImpl) QrCheck(ic *core.InternalContext, data map[string]any) (map[string]any, *core.CustomError) {
+func (x *xenditApiCallImpl) QRCheck(ic *core.InternalContext, data map[string]any) (map[string]any, *core.CustomError) {
 	var apiReq api.HttpParam
 
 	header := make(map[string]string)

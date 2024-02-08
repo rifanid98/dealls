@@ -7,7 +7,7 @@ import (
 	"cloud.google.com/go/pubsub"
 )
 
-//go:generate mockery --name Topic --filename topic.go --output ./mocks
+// //go:generate mockery --name Topic --filename topic.go --output ./mocks
 type Topic interface {
 	Config(ctx context.Context) (pubsub.TopicConfig, error)
 	Update(ctx context.Context, cfg pubsub.TopicConfigToUpdate) (pubsub.TopicConfig, error)
@@ -26,7 +26,7 @@ type Topic interface {
 	GetOriginTopic() *pubsub.Topic
 }
 
-//go:generate mockery --name Subscription --filename subscription.go --output ./mocks
+// //go:generate mockery --name Subscription --filename subscription.go --output ./mocks
 type Subscription interface {
 	String() string
 	ID() string

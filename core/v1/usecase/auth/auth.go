@@ -146,10 +146,10 @@ func (uc *authUsecaseImpl) IsActiveToken(ic *core.InternalContext, accountId str
 	}
 
 	jwtData := entity.Jwt{}
-	if data != nil {
-		err := json.Unmarshal([]byte(*data), &jwtData)
+	if data != "" {
+		err := json.Unmarshal([]byte(data), &jwtData)
 		if err != nil {
-			log.Error(ic.ToContext(), "failed json.Unmarshal([]byte(*data), &jwtData)", err.Error())
+			log.Error(ic.ToContext(), "failed json.Unmarshal([]byte(*data), &jwtData)", err)
 			return &core.CustomError{
 				Code: core.INVALID_JWT_TOKEN,
 			}

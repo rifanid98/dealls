@@ -31,20 +31,18 @@ func (_m *CacheRepository) Delete(ic *core.InternalContext, key string) *core.Cu
 }
 
 // Get provides a mock function with given fields: ic, key
-func (_m *CacheRepository) Get(ic *core.InternalContext, key string) (*string, *core.CustomError) {
+func (_m *CacheRepository) Get(ic *core.InternalContext, key string) (string, *core.CustomError) {
 	ret := _m.Called(ic, key)
 
-	var r0 *string
+	var r0 string
 	var r1 *core.CustomError
-	if rf, ok := ret.Get(0).(func(*core.InternalContext, string) (*string, *core.CustomError)); ok {
+	if rf, ok := ret.Get(0).(func(*core.InternalContext, string) (string, *core.CustomError)); ok {
 		return rf(ic, key)
 	}
-	if rf, ok := ret.Get(0).(func(*core.InternalContext, string) *string); ok {
+	if rf, ok := ret.Get(0).(func(*core.InternalContext, string) string); ok {
 		r0 = rf(ic, key)
 	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*string)
-		}
+		r0 = ret.Get(0).(string)
 	}
 
 	if rf, ok := ret.Get(1).(func(*core.InternalContext, string) *core.CustomError); ok {
